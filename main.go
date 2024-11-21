@@ -23,9 +23,14 @@ import (
 	// MUST be first import.
 	_ "github.com/minio/minio/internal/init"
 
+	"fmt"
+
 	minio "github.com/minio/minio/cmd"
 )
 
 func main() {
+	for _, arg := range os.Args {
+		fmt.Println(arg)
+	}
 	minio.Main(os.Args)
 }

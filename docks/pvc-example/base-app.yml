@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  namespace: xdoc-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: python:3.14.0a2-slim-bullseye  # Replace with your Python image
+        command: ["python", "-c", "import time; time.sleep(10000000)"]
+        volumeMounts:
+        - name: my-volume
+          mountPath: /mnt/data
+      volumes:
+      - name: my-volume
+        persistentVolumeClaim:
+          claimName: nfs-pvc-claim

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  namespace: xdoc-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: python:3.14.0a2-slim-bullseye  # Replace with your Python image
+        command: ["python", "-c", "import time; time.sleep(10000000)"]
+        volumeMounts:
+        - name: my-volume
+          mountPath: /mnt/data
+      volumes:
+      - name: my-volume
+        persistentVolumeClaim:
+          claimName: xdoc-pvc-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: xdoc-pvc-claim
+  namespace: xdoc-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: xdoc-pvc
+---
+# StorageClass (example using NFS)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: xdoc-pvc
+  namespace: xdoc-system
+provisioner: kubernetes.io/nfs
+parameters:
+  path: /codx-file-storage/files
+  server: 192.168.18.36

@@ -29,7 +29,7 @@ helm repo add minio https://charts.min.io/
 Install this chart using:
 
 ```bash
-helm install --namespace minio --set rootUser=rootuser,rootPassword=rootpass123 --generate-name minio/minio
+helm install --namespace minio --set rootUser=root,rootPassword=lacviet@123 --generate-name minio/minio
 ```
 
 The command deploys MinIO on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
