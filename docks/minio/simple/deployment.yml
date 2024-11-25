@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio-nfs
+  namespace: minio-nfs
+  labels:
+    app: minio-nfs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio-nfs
+  template:
+    metadata:
+      labels:
+        app: minio-nfs
+    spec:
+      containers:
+      - name: minio-nfs
+        image: quay.io/minio/minio:latest
+        command: ["server"]
+        args: ["/data"]
+        env:
+        - name: MINIO_ROOT_USER
+          value: storage-user
+        - name: MINIO_ROOT_PASSWORD
+          value: storage-password
+        - name: MINIO_ADDRESS
+          value: 0.0.0.0:9000
+        - name: MINIO_COSOLE_ADDRESS
+          value: 0.0.0.0:9001
+        ports:
+        - containerPort: 9000
+        - containerPort: 9001
+        imagePullPolicy: Always
+        
+        volumeMounts:
+            - name: storage-files
+              mountPath: /data
+      volumes:
+        - name: storage-files
+          nfs:
+            server: 192.168.18.36
+            path: /codx-file-storage/files/minio

@@ -1,0 +1,27 @@
+
+# Why we need linkerd
+# Challanges with Microservices
+# Based on polyglot development
+# Highly distributed
+# Difficult to debug
+# Hard to implement logging and tracing
+# Dynamic scale-in and scale-out
+# Disparate protocols
+# Implements internal and external load balancers
+-----------------
+What is a Service Mesh?
+
+Plugs itself into the intra-service communication
+Intercepts east-west (even north-south) traffic
+Captures telemetry related to services and traffic
+Adds an implicit security layer
+Enables service discovery
+Implements policy-driven routing and traffic management
+Interfaces well with legacy and modern infrastructure
+-------------
+kubectl version --short
+curl -fsSL https://run.linkerd.io/install | sh
+linkerd check --pre
+linkerd install | kubectl apply -f -
+linkerd check
+kubectl get pods -n linkerd

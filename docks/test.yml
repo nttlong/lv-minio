@@ -1,0 +1,58 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: minio-service-2
+  namespace: default
+  
+ 
+    - manager: controller
+      operation: Update
+      apiVersion: v1
+      time: '2024-11-21T12:09:15Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      subresource: status
+    - manager: kubectl-create
+      operation: Update
+      apiVersion: v1
+      time: '2024-11-21T12:09:15Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:allocateLoadBalancerNodePorts: {}
+          f:externalTrafficPolicy: {}
+          f:internalTrafficPolicy: {}
+          f:ports: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+    - manager: dashboard
+      operation: Update
+      apiVersion: v1
+      time: '2024-11-21T12:23:12Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:ports:
+            k:{"port":9000,"protocol":"TCP"}:
+              .: {}
+              f:nodePort: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:type: {}
+spec:
+  ports:
+    - protocol: TCP
+      port: 37520
+      targetPort: 37520
+      
+  selector:
+    app: minio
+  clusterIP: 10.97.46.242
+  clusterIPs:
+    - 10.97.46.242
+  type: NodePort
+  

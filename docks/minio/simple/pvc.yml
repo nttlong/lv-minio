@@ -1,8 +1,8 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: minio-pv-claim
-  namespace: default
+  name: minio-nfs-pv-claim
+  namespace: minio-nfs
 
 spec:
   storageClassName: nfs

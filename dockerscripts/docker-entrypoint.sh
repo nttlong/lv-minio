@@ -23,4 +23,4 @@ docker_switch_user() {
 }
 
 ## DEPRECATED and unsupported - switch to user if applicable.
-docker_switch_user "$@"
+docker_switch_user "$@" 

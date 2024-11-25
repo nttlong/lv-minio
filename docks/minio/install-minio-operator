@@ -1,0 +1,21 @@
+2- modified value
+# Default values for minio-operator.
+
+operator:
+  # Setup environment variables for the Operator
+  env:
+    - name: MINIO_OPERATOR_RUNTIME
+      value: "Rancher"
+    - name: CLUSTER_DOMAIN
+      value: "cluster.domain"
+    - name: WATCHED_NAMESPACE
+      value: ""
+  image:
+    repository: quay.io/minio/operator
+    tag: v5.0.6
+    pullPolicy: IfNotPresent
+    imagePullSecrets: []
+  runtimeClassName: ""
+  initContainers: []
+  env: []
+  replicaCount: 1

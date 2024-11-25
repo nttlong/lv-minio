@@ -1,0 +1,22 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: myapps.mynamespace.com  # Name follows plural+".group" format
+  namespace: test-crd
+spec:
+  group: mynamespace.com
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          # ... (Add your schema properties here)
+  scope: Namespaced  # Choose either ClusterScoped or Namespaced
+  names:
+    plural: myapps
+    singular: myapp
+    kind: MyApp
+    listKind: MyAppList
